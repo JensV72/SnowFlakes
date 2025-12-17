@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomads Christmas</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- INTRO OVERLAY -->
+<div class="intro-overlay" id="intro">
+    <video class="intro-video" autoplay muted loop playsinline>
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <div class="intro-text">
+        <span>Happy Holidays</span><br>
+        <p class="intro-subtext">
+            Scroll up to experience the choreography of the big picture<br>
+            Scroll down to reveal the beauty in every detail
+        </p>
+    </div>
+
+    <button class="intro-button" id="startBtn">
+        Press to continue
+    </button>
+
+</div>
+
+<!-- AUDIO -->
+<audio id="bg-music" loop>
+    <source src="audio/TheChristmasSongMerryChristmasToYou.mp3" type="audio/mpeg">
+</audio>
+
+
+<img src="photos/NomadsLogoName.png" class="overlay-logo" alt="Nomads Logo">
+<img src="photos/sound.png" id="mute-btn" class="mute-button" alt="Mute/Unmute">
+
+<script src="sketch.js"></script>
+<script src="music.js"></script>
+</body>
+</html>

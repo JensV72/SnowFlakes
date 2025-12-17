@@ -1,0 +1,193 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+}
+
+body {
+    background-color: black;
+}
+
+.canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+canvas {
+    display: block;
+}
+
+/* Overlay logo on upper-left */
+.overlay-logo {
+    position: absolute;
+    top: 5vh;
+    left: 3vw;
+    height: 3vh;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* INTRO OVERLAY */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    overflow: hidden;       /* IMPORTANT */
+}
+
+.intro-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Intro text */
+.intro-text {
+    color: rgba(255,255,255,0.85);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2vw;
+    line-height: 1.6;
+    margin-bottom: 5vh; /* space below button */
+}
+
+/* Title span */
+.intro-text span {
+    display: block;
+    font-size: 3.2vw;
+    margin-bottom: -2vh;
+}
+
+/* Subtext paragraph */
+.intro-text p {
+    font-size: 1.2vw;
+    line-height: 1.6;
+    margin: 0; /* no extra margin */
+}
+
+/* Dotted line style */
+.dotted-line {
+    border: none;
+    border-top: 4px dotted rgba(255,255,255,0.8);
+    width: 37vw;
+    margin: 20px 0;
+}
+
+.intro-button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.8);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2vw;
+    padding: 12px 36px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
+.intro-button:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.mute-button {
+    position: absolute;
+    top: 5vh;
+    right: 3vw;
+    height: 3vh;
+    width: 3vh;
+    cursor: pointer;
+}
+
+.intro-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* fills screen without stretching */
+    z-index: -1;            /* puts video behind text */
+
+}
+
+/* ------------------------------
+   MOBILE ADJUSTMENTS
+   ------------------------------ */
+@media (max-width: 768px) {
+
+    .intro-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        padding-bottom: 0.1rem;
+    }
+
+    .intro-text span {
+        font-size: 2rem;
+        line-height: 1;
+        display: block;
+        margin-bottom: 0.8rem; /* spacing from paragraph */
+    }
+
+    .intro-text p {
+        font-size: 0.9rem;
+    }
+
+    .intro-button {
+        font-size: 1rem;
+        padding: 14px 36px;
+    }
+
+    .overlay-logo {
+        height: 2.2vh;
+        top: 4vh;
+        left: 5vw;
+    }
+
+    .mute-button {
+        height: 2.2vh;
+        width: 2.2vh;
+        top: 4vh;
+        right: 5vw;
+    }
+
+    .dotted-line {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .intro-text {
+        font-size: 0.85rem;
+    }
+
+    .intro-text span {
+        font-size: 1.9rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .intro-text p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .intro-text {
+        font-size: 0.8rem;
+    }
+
+    .intro-text span {
+        font-size: 1.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .intro-text p {
+        font-size: 0.8rem;
+    }
+}
