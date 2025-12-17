@@ -27,13 +27,13 @@ function preload() {
 
     // Load different video for mobile
     if (isMobile) {
-        video = createVideo("balletMobile3.mp4", () => {
+        video = createVideo("videos/balletMobile3.mp4", () => {
             video.volume(0);
             video.loop();
             videoReady = true;
         });
     } else {
-        video = createVideo("ballet4.mp4", () => {
+        video = createVideo("videos/ballet4.mp4", () => {
             video.volume(0);
             video.loop();
             videoReady = true;
