@@ -5,22 +5,19 @@ const muteBtn = document.getElementById("mute-btn");
 
 let isMuted = false;
 
-// Mute/unmute button
 muteBtn.addEventListener("click", () => {
     isMuted = !isMuted;
     music.muted = isMuted;
-
-    // Swap the icon
-    if (isMuted) {
-        muteBtn.src = "photos/mute.png";
-    } else {
-        muteBtn.src = "photos/sound.png";
-    }
+    muteBtn.src = isMuted ? "photos/mute.png" : "photos/sound.png";
 });
 
-// Start button
 function startExperience() {
     intro.classList.add("hidden");
+
+    // START VIDEO (iOS fix)
+    if (window.startVideoFromUserGesture) {
+        window.startVideoFromUserGesture();
+    }
 
     music.volume = 0;
     music.play();
@@ -34,5 +31,3 @@ function startExperience() {
 }
 
 button.addEventListener("click", startExperience);
-
-
