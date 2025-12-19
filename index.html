@@ -14,7 +14,7 @@
 <body>
 
 <div class="intro-overlay" id="intro">
-    <video class="intro-video" autoplay muted loop playsinline>
+    <video class="intro-video" autoplay loop playsinline>
         <source src="videos/background.mp4" type="video/mp4">
     </video>
 
@@ -30,20 +30,26 @@
         Press to continue
     </button>
 
-    <p class="sound-hint ios-only">
-        Turn off silent mode to hear the music
-    </p>
+<!--    <p class="sound-hint ios-only">-->
+<!--        Turn off silent mode to hear the music-->
+<!--    </p>-->
 </div>
 
-<audio id="bg-music" loop playsinline webkit-playsinline>
+<audio id="bg-music" loop preload="auto">
     <source src="audio/TheChristmasSongMerryChristmasToYou.mp3" type="audio/mpeg">
 </audio>
 
-<img src="photos/NomadsLogoName.png" class="overlay-logo" alt="Nomads Logo">
+
+<a href="https://www.wearenomads.com/" target="_blank">
+    <img src="photos/NomadsLogoName.png" class="overlay-logo" alt="Nomads Logo">
+</a>
 <img src="photos/sound.png" id="mute-btn" class="mute-button" alt="Mute/Unmute">
 
 <script src="sketch.js"></script>
 <script src="music.js"></script>
+
+
+
 
 </body>
 </html>

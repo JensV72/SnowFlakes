@@ -14,7 +14,6 @@ let videoReady = false;
 
 let lastTouchDist = 0;
 let lastTouchY = null;
-
 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 function preload() {
@@ -24,14 +23,11 @@ function preload() {
     }
 
     // Create video
-    const videoSrc = isMobile
-        ? "videos/balletMobile3.mp4"
-        : "videos/ballet4.mp4";
-
+    const videoSrc = isMobile ? "videos/balletMobile3.mp4" : "videos/ballet4.mp4";
     video = createVideo(videoSrc);
     video.attribute("playsinline", "");
     video.attribute("webkit-playsinline", "");
-    video.attribute("muted", "");
+    video.attribute("muted", ""); // video muted for iOS autoplay
     video.volume(0);
     video.hide();
 }
@@ -40,25 +36,22 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     imageMode(CENTER);
 
-    // Initial grid size per device
+    // Initial grid size
     gridCells = isMobile ? minCellsPhone : minCells;
 
     sortFlakesByBrightness();
     resizedFlakes = origFlakeImgs.map(img => img.get());
 }
 
-
 function draw() {
     background(0);
-    if (!videoReady) return;
-    if (video.width === 0 || video.height === 0) return;
+    if (!videoReady || video.width === 0 || video.height === 0) return;
 
     video.loadPixels();
     if (!video.pixels || video.pixels.length < 4) return;
 
     let videoAspect = video.width / video.height;
     let canvasAspect = width / height;
-
     let drawW, drawH, offsetX, offsetY;
 
     if (canvasAspect > videoAspect) {
@@ -99,16 +92,10 @@ function draw() {
 
             let vx = floor(map(x - offsetX, 0, drawW, 0, video.width));
             let vy = floor(map(y - offsetY, 0, drawH, 0, video.height));
-
             let idx = (vy * video.width + vx) * 4;
             if (idx < 0 || idx + 2 >= video.pixels.length) continue;
 
-            let bright = (
-                video.pixels[idx] +
-                video.pixels[idx + 1] +
-                video.pixels[idx + 2]
-            ) / 3;
-
+            let bright = (video.pixels[idx] + video.pixels[idx+1] + video.pixels[idx+2]) / 3;
             let imgIndex = floor(map(bright, 0, 255, 0, resizedFlakes.length));
             imgIndex = constrain(imgIndex, 0, resizedFlakes.length - 1);
 
@@ -117,7 +104,7 @@ function draw() {
     }
 }
 
-// iOS REQUIRED: start video after click
+
 function startVideoFromUserGesture() {
     if (!videoReady) {
         video.loop();
@@ -128,19 +115,18 @@ window.startVideoFromUserGesture = startVideoFromUserGesture;
 
 function sortFlakesByBrightness() {
     let list = [];
-
     for (let img of origFlakeImgs) {
         img.loadPixels();
         let sum = 0;
         for (let i = 0; i < img.pixels.length; i += 4) {
-            sum += (img.pixels[i] + img.pixels[i + 1] + img.pixels[i + 2]) / 3;
+            sum += (img.pixels[i] + img.pixels[i+1] + img.pixels[i+2]) / 3;
         }
         list.push(sum / (img.pixels.length / 4));
     }
 
     origFlakeImgs = origFlakeImgs
-        .map((img, i) => ({ img, bright: list[i] }))
-        .sort((a, b) => a.bright - b.bright)
+        .map((img,i) => ({img, bright: list[i]}))
+        .sort((a,b) => a.bright - b.bright)
         .map(o => o.img);
 }
 
@@ -155,18 +141,18 @@ function touchMoved() {
     if (touches.length === 2) {
         let dx = touches[0].x - touches[1].x;
         let dy = touches[0].y - touches[1].y;
-        let dist = sqrt(dx * dx + dy * dy);
+        let dist = sqrt(dx*dx + dy*dy);
 
         if (lastTouchDist > 0) {
             let delta = lastTouchDist - dist;
-            gridCells += delta * 0.05;
+            gridCells += delta*0.05;
             gridCells = constrain(gridCells, minCellsPhone, maxCellsPhone);
         }
         lastTouchDist = dist;
     } else if (touches.length === 1) {
         if (lastTouchY !== null) {
             let delta = lastTouchY - touches[0].y;
-            gridCells += delta * 0.05;
+            gridCells += delta*0.05;
             gridCells = constrain(gridCells, minCellsPhone, maxCellsPhone);
         }
         lastTouchY = touches[0].y;

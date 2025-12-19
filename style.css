@@ -28,7 +28,6 @@ canvas {
     left: 3vw;
     height: 3vh;
     opacity: 0.8;
-    pointer-events: none;
 }
 
 /* INTRO OVERLAY */
@@ -117,17 +116,6 @@ canvas {
 
 }
 
-.sound-hint {
-    font-family: 'Cormorant Garamond', serif;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.9rem;
-    margin-top: 10px;
-    display: none;
-}
-
-.ios-only {
-    display: none;
-}
 
 
 /* ------------------------------
