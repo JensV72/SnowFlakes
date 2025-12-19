@@ -3,7 +3,7 @@ let origFlakeImgs = [];
 let resizedFlakes = [];
 const flakeCount = 20;
 
-let gridCells = 30;
+let gridCells;
 const minCells = 30;
 const minCellsPhone = 10;
 const maxCells = 300;
@@ -40,9 +40,13 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     imageMode(CENTER);
 
+    // Initial grid size per device
+    gridCells = isMobile ? minCellsPhone : minCells;
+
     sortFlakesByBrightness();
     resizedFlakes = origFlakeImgs.map(img => img.get());
 }
+
 
 function draw() {
     background(0);
